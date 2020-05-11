@@ -8,6 +8,6 @@ Sovelluksen avulla rekisteröityneet käyttäjät voivat selata, lisätä ja osa
 
 #### Alustava tietokantakaavio:
 
-![kaavio](dokumentaatio/tietokantakaavio.png)
+![kaavio](documentation/tietokantakaavio.png)
 
-[Työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
+[Työaikakirjanpito](documentation/tyoaikakirjanpito.md)
