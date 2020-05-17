@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <section class="section">
+        <p class="title">Venues</p>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+            </tr>
+            {% for v in venues %}
+            <tr>
+                <td>{{ v.name }}</td>
+                <td>{{ v.location }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="button is-primary" href="/venues/new/">Add new venue</a>
+    </section>
+</div>
+{% endblock %}

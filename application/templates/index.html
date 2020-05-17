@@ -1,5 +1,16 @@
-{% extends "layout.html" %} {% block body %}
-<p>
-  Hello world!
-</p>
+{% extends "layout.html" %}
+{% block body %}
+<section class="container">
+  <p class="title">
+    Event calendar
+  </p>
+  {% if current_user.is_authenticated %}
+  <p class="subtitle">
+    Welcome, {{ current_user.username }}
+  </p>
+  {% else %}
+  <button class="button">Sign up</button>
+  <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
+  {% endif %}
+</section>
 {% endblock %}
