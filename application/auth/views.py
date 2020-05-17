@@ -16,11 +16,11 @@ def auth_login():
     user = User.query.filter_by(username=form.username.data).first()
     if not user:
         return render_template(
-            "auth/loginform.html", form=form, error="No such username"
+            "auth/loginform.html", form=form, erroru="No such username"
         )
     if not user.is_correct_password(form.password.data):
         return render_template(
-            "auth/loginform.html", form=form, error="Invalid password"
+            "auth/loginform.html", form=form, errorp="Invalid password"
         )
     login_user(user)
     print("User " + user.username + " authenticated!")

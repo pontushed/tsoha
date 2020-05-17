@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <section class="section">
+        <p class="title">{{ action }} {{ data_type }}</p>
+        {% if action == 'Add' %}
+        <form method="POST" action="{{ url_for('venues_create') }}">
+            {% else %}
+            <form method="POST" action="{{ url_for('venues_update', venue_id=id) }}">
+                {% endif %}
+                <div class="field">
+                    <label class="label">{{ form.name.label}}</label>
+                    <div class=" control">
+                        {{ form.name(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.name.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field">
+                    <label class="label">{{ form.location.label}}</label>
+                    <div class="control">
+                        {{ form.location(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.location.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Save" />
+                    </div>
+                    <div class="control">
+                        <a class="button is-light" href="{{ url_for('venues_index') }}">Go back</a>
+                    </div>
+                </div>
+            </form>
+    </section>
+</div>
+{% endblock %}

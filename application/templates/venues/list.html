@@ -13,10 +13,22 @@
             <tr>
                 <td>{{ v.name }}</td>
                 <td>{{ v.location }}</td>
+                {% if current_user.is_authenticated %}
+                <td>
+                    <a class="button is-small" href="{{ url_for('venues_edit', venue_id=v.id) }}">Edit</a>
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('venues_delete', venue_id=v.id) }}">
+                        <input class="button is-small" type="submit" value="Delete" />
+                    </form>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
+        {% if current_user.is_authenticated %}
         <a class="button is-primary" href="/venues/new/">Add new venue</a>
+        {% endif %}
     </section>
 </div>
 {% endblock %}
