@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <section class="section">
+        <div class="level">
+            <p class="title">Events</p>
+            {% if current_user.is_authenticated %}
+            <a class="button is-primary" href="/events/new/">Organize a new event</a>
+            {% endif %}
+        </div>
+        <ul>
+            {% for e in events %}
+            <li class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ e.name }}</strong> <small>@{{ e.venue_name }}</small><br>
+                                <small>From {{ e.start_time }} -
+                                    to {{ e.end_time }}</small>
+                                <br>
+                                {{ e.info }}<br>
+                                Organized by {{ e.organizer }}
+                            </p>
+                        </div>
+                    </div>
+                    {% if current_user.is_authenticated %}
+                    <div class="media-right">
+                        <a href="{{ url_for('events_edit', event_id=e.id) }}" title="Edit event"><i
+                                class="fas fa-edit"></i></a>
+                        <form method="POST" action="{{ url_for('events_delete', event_id=e.id) }}">
+                            <button class="delete" type="submit"></button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </article>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

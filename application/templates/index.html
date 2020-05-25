@@ -9,7 +9,7 @@
     Welcome, {{ current_user.username }}
   </p>
   {% else %}
-  <button class="button disabled" disabled>Sign up</button>
+  <a class="button" href="{{ url_for('auth_register') }}">Sign up</a>
   <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
   {% endif %}
 </section>

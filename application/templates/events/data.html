@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <section class="section">
+        <p class="title">{{ action }} {{ data_type }}</p>
+        {% if action == 'Organize' %}
+        <form method="POST" action="{{ url_for('events_create') }}">
+            {% else %}
+            <form method="POST" action="{{ url_for('events_update', event_id=id) }}">
+                {% endif %}
+                <div class="field">
+                    <label class="label">{{ form.name.label}}</label>
+                    <div class=" control">
+                        {{ form.name(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.name.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field">
+                    <label class="label">{{ form.info.label}}</label>
+                    <div class=" control">
+                        {{ form.info(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.info.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field">
+                    <label class="label">{{ form.venue.label}}</label>
+                    <div class="control">
+                        {{ form.venue(class_="select") }}
+                    </div>
+                    <ul>
+                        {% for error in form.venue.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Save" />
+                    </div>
+                    <div class="control">
+                        <a class="button is-light" href="{{ url_for('events_index') }}">Go back</a>
+                    </div>
+                </div>
+            </form>
+    </section>
+</div>
+{% endblock %}

@@ -33,6 +33,7 @@ from application.auth.models import Role, User
 from application.auth import views
 from application.comments import models
 from application.events import models
+from application.events import views
 from application.venues import models
 from application.venues import views
 
@@ -57,11 +58,15 @@ db.create_all()
 # Create a user to test with
 @app.before_first_request
 def create_user():
+    u = User(
+        username="admin",
+        full_name="Administrator",
+        password="admin",
+        email="admin@localhost",
+    )
     if not user_datastore.get_user("admin@localhost"):
-        user_datastore.create_user(
-            username="admin", email="admin@localhost", password="admin"
-        )
-    db.session.commit()
+        db.session.add(u)
+        db.session.commit()
 
 
 if __name__ == "__main__":

@@ -41,8 +41,13 @@ class User(db.Model, UserMixin):
         self.username = kwargs["username"]
         self.email = kwargs["email"]
         self.password = kwargs["password"]
-        if kwargs.get("full_name", False):
+        if kwargs.get("full_name") == False:
             self.full_name = kwargs["username"]
+        else:
+            self.full_name = kwargs["full_name"]
+
+    def __str__(self):
+        return "User: " + self.username + "(" + self.full_name + "), " + self.email
 
     @hybrid_property
     def password(self):

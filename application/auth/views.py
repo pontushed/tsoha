@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for
 import bcrypt
-from application import app
-from application.auth.models import User
-from application.auth.forms import LoginForm
+from application import app, db
+from application.auth.models import User, Role
+from application.auth.forms import LoginForm, RegisterForm
 from flask_login import login_user, logout_user
 
 
@@ -23,11 +23,33 @@ def auth_login():
             "auth/loginform.html", form=form, errorp="Invalid password"
         )
     login_user(user)
-    print("User " + user.username + " authenticated!")
     return redirect(url_for("index"))
 
 
 @app.route("/logout")
 def auth_logout():
     logout_user()
+    return redirect(url_for("index"))
+
+
+@app.route("/register", methods=["GET", "POST"])
+def auth_register():
+    if request.method == "GET":
+        return render_template("auth/registerform.html", form=RegisterForm())
+
+    form = RegisterForm(request.form)
+
+    if not form.validate():
+        return render_template("auth/registerform.html", form=form, action="Register")
+
+    u = User(
+        username=form.username.data,
+        full_name=form.full_name.data,
+        password=form.password.data,
+        email=form.email.data,
+    )
+
+    db.session.add(u)
+    db.session().commit()
+    login_user(u)
     return redirect(url_for("index"))

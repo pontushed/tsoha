@@ -10,3 +10,11 @@ class Event(db.Model):
     venue_id = db.Column(db.Integer, db.ForeignKey("venue.id"), nullable=False)
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
+
+    def __init__(self, **kwargs):
+        self.admin_id = kwargs["admin_id"]
+        self.name = kwargs["name"]
+        self.info = kwargs["info"]
+        self.venue_id = kwargs["venue_id"]
+        self.start_time = kwargs["start_time"]
+        self.end_time = kwargs["end_time"]

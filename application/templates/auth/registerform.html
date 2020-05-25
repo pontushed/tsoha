@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <form method="POST" class="box" action="{{ url_for('auth_register') }}">
+                <p class="subtitle">Sign up as a new user</p>
+                <div class="field">
+                    {{ form.username.label(class_="label") }}
+                    <div class="control">
+                        {{ form.username(class_="input") }}
+                    </div>
+                    {% for error in form.username.errors %}
+                    <p class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                </div>
+                <div class="field">
+                    {{ form.password.label(class_="label") }}
+                    <div class="control">
+                        {{ form.password(class_="input") }}
+                    </div>
+                    {% for error in form.password.errors %}
+                    <p class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                </div>
+                <div class="field">
+                    {{ form.full_name.label(class_="label") }}
+                    <div class="control">
+                        {{ form.full_name(class_="input") }}
+                    </div>
+                    {% for error in form.full_name.errors %}
+                    <p class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                </div>
+                <div class="field">
+                    {{ form.email.label(class_="label") }}
+                    <div class="control">
+                        {{ form.email(class_="input") }}
+                    </div>
+                    {% for error in form.email.errors %}
+                    <p class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                </div>
+                <p class="control">
+                    <input class="button is-primary" type="submit" value="Register" />
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

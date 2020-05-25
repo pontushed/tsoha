@@ -60,11 +60,11 @@ def venues_create():
 @login_required
 def venues_update(venue_id):
     form = VenueForm(request.form)
+    v = Venue.query.get(venue_id)
     if not form.validate():
         return render_template(
-            "venues/data.html", form=form, action="Edit", data_type=v.name, id=venue.id,
+            "venues/data.html", form=form, action="Edit", data_type=v.name, id=v.id,
         )
-    v = Venue.query.get(venue_id)
     v.name = form.name.data
     v.location = form.location.data
     db.session().commit()
