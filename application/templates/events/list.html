@@ -3,12 +3,10 @@
 {% block body %}
 <div class="container">
     <section class="section">
-        <div class="level">
-            <p class="title">Events</p>
-            {% if current_user.is_authenticated %}
-            <a class="button is-primary" href="/events/new/">Organize a new event</a>
-            {% endif %}
-        </div>
+        <p class="title">Events</p>
+        {% if current_user.is_authenticated %}
+        <a class="button is-primary" href="/events/new/">Organize a new event</a>
+        {% endif %}
         <ul>
             {% for e in events %}
             <li class="box">
