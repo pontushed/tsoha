@@ -9,12 +9,11 @@ Sovelluksen avulla rekisteröityneet käyttäjät voivat selata, lisätä ja osa
 Käyttötapauksista löytyy tarkemmat kuvaukset [täältä.](documentation/kayttotapaukset.md)
 
 ## Sovellus Herokussa
-[Avaa tästä](https://tsoha-pontushed.herokuapp.com) Kirjaudu sisään tunnuksella 'admin', salasana 'admin'.
-Toistaiseksi olen toteuttanut vain CRUD-toiminnot Venues-tauluun.
+[Avaa tästä](https://tsoha-pontushed.herokuapp.com) Kirjaudu sisään tunnuksella 'admin', salasana 'admin', tai rekisteröidy uutena käyttäjänä. Kaikilla käyttäjillä on tällä hetkellä samat (admin)oikeudet.
 
 ## Dokumentaatio
 
-#### Alustava tietokantakaavio:
+#### Tietokantakaavio:
 
 ![kaavio](documentation/tietokantakaavio.png)
 

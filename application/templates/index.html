@@ -6,11 +6,16 @@
   </p>
   {% if current_user.is_authenticated %}
   <p class="subtitle">
-    Welcome, {{ current_user.username }}
+    Welcome, {{ current_user.full_name }}
   </p>
+  <p>Start by viewing events by clicking 'Events' on the menu.</p>
   {% else %}
-  <a class="button" href="{{ url_for('auth_register') }}">Sign up</a>
-  <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
+  <p>Welcome, visitor. You can view events by clicking 'Events' on the menu.</p>
+  <div class="box">
+    <p class="subtitle">To participate, please:</p>
+    <a class="button" href="{{ url_for('auth_register') }}">Sign up</a>
+    <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
+  </div>
   {% endif %}
 </section>
 {% endblock %}

@@ -6,4 +6,5 @@ Pidän myös [kehityspäiväkirjaa](kehityspaivakirja.md), jossa selostan tarkem
 | :------: | :----------: | :---------------- |
 |   11.5   |      1       | Projektin alustus |
 | 17.5 | 7 | Venues CRUD, Bulma-tyylikirjasto, Autentikointi + Bcrypt |
-| **yht.** | _*8 tuntia*_ |
+| 25.5 | 5 | Events CRUD, Rekisteröityminen ja sen validointi |
+| **yht.** | _*13 tuntia*_ |
