@@ -55,18 +55,19 @@ def load_user(user_id):
 
 db.create_all()
 
+# Test credentials should not be in the code. This will be removed later.
 # Create a user to test with
-@app.before_first_request
-def create_user():
-    u = User(
-        username="admin",
-        full_name="Administrator",
-        password="admin",
-        email="admin@localhost",
-    )
-    if not user_datastore.get_user("admin@localhost"):
-        db.session.add(u)
-        db.session.commit()
+# @app.before_first_request
+# def create_user():
+#     u = User(
+#         username="admin",
+#         full_name="Administrator",
+#         password="admin",
+#         email="admin@localhost",
+#     )
+#     if not user_datastore.get_user("admin@localhost"):
+#         db.session.add(u)
+#         db.session.commit()
 
 
 if __name__ == "__main__":

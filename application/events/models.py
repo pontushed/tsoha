@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy import text
 
 
 class Event(db.Model):
@@ -18,3 +19,13 @@ class Event(db.Model):
         self.venue_id = kwargs["venue_id"]
         self.start_time = kwargs["start_time"]
         self.end_time = kwargs["end_time"]
+
+    @staticmethod
+    def list_events():
+        sql = text(
+            """SELECT t1.*, t2.full_name AS organizer, t3.name AS venue_name, t3.location AS venue_location
+        FROM event t1
+        INNER JOIN account t2 ON t1.admin_id=t2.id
+        INNER JOIN venue t3 ON t1.venue_id=t3.id"""
+        )
+        return db.engine.execute(sql)

@@ -5,19 +5,11 @@ from application.events.forms import EventForm
 from application.venues.models import Venue
 from flask_login import login_required, current_user
 from datetime import datetime, timedelta
-from sqlalchemy import text
 
 
 @app.route("/events/", methods=["GET"])
 def events_index():
-    sql = text(
-        """select t1.*, t2.full_name as organizer, t3.name as venue_name, t3.location as venue_location
-        from event t1
-        inner join account t2 on t1.admin_id=t2.id
-        inner join venue t3 on t1.venue_id=t3.id"""
-    )
-    events = db.engine.execute(sql)
-    return render_template("events/list.html", events=events)
+    return render_template("events/list.html", events=Event.list_events())
 
 
 @app.route("/events/new/")
