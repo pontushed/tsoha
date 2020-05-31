@@ -1,13 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
-    IntegerField,
     SelectField,
     DateTimeField,
     validators,
     ValidationError,
 )
-from application.venues.models import Venue
 from datetime import datetime as dt
 
 
