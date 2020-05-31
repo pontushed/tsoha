@@ -28,6 +28,10 @@ def events_form():
 @login_required
 def events_create():
     form = EventForm(request.form)
+    venueChoices = [
+        (v.id, (v.name + " (" + v.location + ")")) for v in Venue.query.all()
+    ]
+    form.venue.choices = venueChoices
     if not form.validate():
         return render_template(
             "events/data.html", form=form, action="Organize", data_type="a new event"
@@ -74,6 +78,10 @@ def events_delete(event_id):
 @login_required
 def events_update(event_id):
     form = EventForm(request.form)
+    venueChoices = [
+        (v.id, (v.name + " (" + v.location + ")")) for v in Venue.query.all()
+    ]
+    form.venue.choices = venueChoices
     e = Event.query.get(event_id)
     if not form.validate():
         return render_template(
