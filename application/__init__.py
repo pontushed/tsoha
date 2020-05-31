@@ -27,6 +27,8 @@ db = SQLAlchemy(app)
 # Use Bcrypt module
 bcrypt = Bcrypt(app)
 
+from application.utils import filters
+
 from application import views
 from application.auth import models
 from application.auth.models import Role, User

@@ -42,6 +42,28 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="field">
+                    <label class="label">{{ form.start_time.label}}</label>
+                    <div class="control">
+                        {{ form.start_time(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.start_time.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="field">
+                    <label class="label">{{ form.end_time.label}}</label>
+                    <div class="control">
+                        {{ form.end_time(class_="input") }}
+                    </div>
+                    <ul>
+                        {% for error in form.end_time.errors %}
+                        <li class="help is-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <div class="field is-grouped">
                     <div class="control">
                         <input class="button is-primary" type="submit" value="Save" />

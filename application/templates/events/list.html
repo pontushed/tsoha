@@ -16,8 +16,8 @@
                             <p>
                                 <strong>{{ e.name }}</strong> <small>@{{ e.venue_name }},
                                     {{ e.venue_location }}</small><br>
-                                <small>From {{ e.start_time }} -
-                                    to {{ e.end_time }}</small>
+                                <small>{{ e.start_time|datetime }} -
+                                    {{ e.end_time|datetime }}</small>
                                 <br>
                                 {{ e.info }}<br>
                                 Organized by {{ e.organizer }}

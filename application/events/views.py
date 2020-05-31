@@ -4,7 +4,6 @@ from application.events.models import Event
 from application.events.forms import EventForm
 from application.venues.models import Venue
 from flask_login import login_required, current_user
-from datetime import datetime, timedelta
 
 
 @app.route("/events/", methods=["GET"])
@@ -36,8 +35,8 @@ def events_create():
         name=form.name.data,
         info=form.info.data,
         venue_id=form.venue.data,
-        start_time=datetime.now(),
-        end_time=datetime.now() + timedelta(hours=2),
+        start_time=form.start_time.data,
+        end_time=form.end_time.data,
     )
 
     db.session().add(e)
@@ -81,8 +80,8 @@ def events_update(event_id):
     e.name = form.name.data
     e.info = form.info.data
     e.venue_id = form.venue.data
-    e.start_time = datetime.now()
-    e.end_time = datetime.now() + timedelta(hours=2)
+    e.start_time = form.start_time.data
+    e.end_time = form.end_time.data
     db.session().commit()
 
     return redirect(url_for("events_index"))

@@ -26,6 +26,7 @@ class Event(db.Model):
             """SELECT t1.*, t2.full_name AS organizer, t3.name AS venue_name, t3.location AS venue_location
         FROM event t1
         INNER JOIN account t2 ON t1.admin_id=t2.id
-        INNER JOIN venue t3 ON t1.venue_id=t3.id"""
+        INNER JOIN venue t3 ON t1.venue_id=t3.id
+        WHERE t1.end_time > date('now')"""
         )
         return db.engine.execute(sql)
