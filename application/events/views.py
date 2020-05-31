@@ -14,11 +14,13 @@ def events_index():
 @app.route("/events/new/")
 @login_required
 def events_form():
+    venueChoices = [
+        (v.id, (v.name + " (" + v.location + ")")) for v in Venue.query.all()
+    ]
+    eventForm = EventForm()
+    eventForm.venue.choices = venueChoices
     return render_template(
-        "events/data.html",
-        form=EventForm(),
-        action="Organize",
-        data_type="a new event",
+        "events/data.html", form=eventForm, action="Organize", data_type="a new event",
     )
 
 
@@ -48,13 +50,14 @@ def events_create():
 @app.route("/events/<event_id>", methods=["GET"])
 @login_required
 def events_edit(event_id):
+    venueChoices = [
+        (v.id, (v.name + " (" + v.location + ")")) for v in Venue.query.all()
+    ]
     e = Event.query.get(event_id)
+    eventForm = EventForm(obj=e)
+    eventForm.venue.choices = venueChoices
     return render_template(
-        "events/data.html",
-        form=EventForm(obj=e),
-        action="Edit",
-        data_type=e.name,
-        id=e.id,
+        "events/data.html", form=eventForm, action="Edit", data_type=e.name, id=e.id,
     )
 
 
