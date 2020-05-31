@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.urandom(32)
 if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 else:
     app.config["DEBUG"] = True
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///events.db"
