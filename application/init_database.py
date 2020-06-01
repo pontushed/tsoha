@@ -13,6 +13,7 @@ def create_user():
     Venue.query.delete()
     User.query.delete()
     db.session.commit()
+
     u = User(
         username="admin",
         full_name="Administrator",
