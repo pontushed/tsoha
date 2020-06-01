@@ -18,13 +18,15 @@ def index():
 def event_summary():
     stmt = text(
         """
-        SELECT t2.name as venue_name, t2.location as venue_location, t1.*,
-        COUNT(t3.user_id) as participants, account.full_name as organizer
-        FROM Event t1
-        LEFT JOIN Venue t2 on t1.venue_id=t2.id
-        INNER JOIN events_participants t3 ON t3.event_id=t1.id
-        INNER JOIN account ON t1.admin_id=account.id
-        WHERE t1.end_time > date('now')
-        GROUP BY t2.name"""
+        WITH t4 AS (
+            SELECT t1.*, count(t2.user_id) participants FROM event t1
+            INNER JOIN events_participants t2
+            ON t2.event_id=t1.id
+            GROUP BY t1.id
+        )
+        SELECT t3.name venue_name, t3.location venue_location, t4.*, account.full_name as organizer
+        FROM venue t3 LEFT JOIN t4 ON t4.venue_id = t3.id
+        INNER JOIN account ON t4.admin_id=account.id
+    """
     )
     return db.engine.execute(stmt)
