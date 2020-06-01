@@ -1,8 +1,6 @@
-# Harjoitustyö - Tietokantasovellus
-
-#### Alkukesä 2020
-
 # Tapahtumakalenteri
+
+#### Harjoitustyö - Tietokantasovellus - Alkukesä 2020
 
 Sovelluksen avulla rekisteröityneet käyttäjät voivat selata, lisätä ja osallistua tapahtumiin sekä käydä keskustelua tapahtuman sivulla.
 
