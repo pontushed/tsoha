@@ -1,5 +1,14 @@
 # Kehityspäiväkirja
 
+#### 1.6.2020
+
+Lisäsin yhteenvetokyselyn etusivulle. Se näyttää suositut tapahtumat, eli tapahtumat, joissa on osallistujia.
+Etusivulta voi myös suoraan liittyä tai poistua tapahtumasta, jos on kirjautunut sisään.
+Lisäsin suojauksen, että vain tapahtuman luoja voi muokata tai poistaa tapahtuman.
+Lisäsin myös varmistuksen poistojen yhteyteen. Tapahtumapaikan poisto poistaa kaikki siihen liitetyt tapahtumat!
+
+
+
 #### 31.5.2020
 
 Lisäsin ajan validoinnin "Organize new event"-lomakkeeseen. Alku- ja lopetusajan pitää olla tulevaisuudessa, ekä lopetusajan pitää olla alkuajan jälkeen.

@@ -8,7 +8,7 @@
   <p class="subtitle">
     Welcome, {{ current_user.full_name }}
   </p>
-  <p>Start by viewing events by clicking 'Events' on the menu.</p>
+  <p>Start by viewing events by clicking 'Events' on the menu, and maybe join one!</p>
   {% else %}
   <p>Welcome, visitor. You can view events by clicking 'Events' on the menu.</p>
   <div class="box">
@@ -17,5 +17,43 @@
     <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
   </div>
   {% endif %}
+  <h2 class="subtitle">Popular events:</h2>
+  <ul>
+    {% for e in events %}
+    <li class="box">
+      <article class="media">
+        <div class="media-left">
+          <p class="title">{{ e.participants }}</p>
+          Participant(s)
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>{{ e.name }}</strong> <small>@{{ e.venue_name }},
+                {{ e.venue_location }}</small><br>
+              <small>{{ e.start_time|datetime }} -
+                {{ e.end_time|datetime }}</small>
+              <br>
+              {{ e.info }}<br>
+              Organized by {{ e.organizer }}
+              {% if current_user.is_authenticated %}
+              {% if e.id in myevents %}
+            <p class="subtitle">You have joined this event!</p>
+            <form method="POST" action="{{ url_for('leave_event', event_id=e.id) }}?frontpage=1">
+              <button class="button" type="submit">Leave event</button>
+            </form>
+            {% else %}
+            <form method="POST" action="{{ url_for('join_event', event_id=e.id) }}?frontpage=1">
+              <button class="button" type="submit">Join event</button>
+            </form>
+            {% endif %}
+            {% endif %}
+            </p>
+          </div>
+        </div>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 {% endblock %}

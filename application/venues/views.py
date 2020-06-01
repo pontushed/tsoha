@@ -1,6 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
 from application.venues.models import Venue
+from application.events.models import Event
 from application.venues.forms import VenueForm
 from flask_login import login_required
 
@@ -34,6 +35,7 @@ def venues_edit(venue_id):
 @app.route("/venues/delete/<venue_id>", methods=["POST"])
 @login_required
 def venues_delete(venue_id):
+    Event.query.filter_by(venue_id=venue_id).delete()
     v = Venue.query.get(venue_id)
     db.session.delete(v)
     db.session().commit()

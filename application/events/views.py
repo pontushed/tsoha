@@ -122,6 +122,8 @@ def join_event(event_id):
     event = Event.query.get(event_id)
     user.events.append(event)
     db.session.commit()
+    if "frontpage=1" in request.url:
+        return redirect(url_for("index"))
     return redirect(url_for("events_index"))
 
 
@@ -137,4 +139,7 @@ def leave_event(event_id):
     event = Event.query.get(event_id)
     user.events.remove(event)
     db.session.commit()
+
+    if "frontpage=1" in request.url:
+        return redirect(url_for("index"))
     return redirect(url_for("events_index"))

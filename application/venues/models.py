@@ -1,4 +1,5 @@
 from application import db
+from application.events.models import Event
 
 
 class Venue(db.Model):
@@ -9,9 +10,9 @@ class Venue(db.Model):
         default=db.func.current_timestamp(),
         onupdate=db.func.current_timestamp(),
     )
-
     name = db.Column(db.String(144), nullable=False)
     location = db.Column(db.String(144), nullable=False)
+    events = db.relationship("Event", backref="event")
 
     def __init__(self, name, location):
         self.name = name

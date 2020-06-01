@@ -42,7 +42,8 @@
                             href="{{ url_for('events_edit', event_id=e.id) }}">
                             Edit
                         </a>
-                        <form method="POST" action="{{ url_for('events_delete', event_id=e.id) }}">
+                        <form method="POST" onSubmit="return confirm('Are you sure you wish to remove?');"
+                            action="{{ url_for('events_delete', event_id=e.id) }}">
                             <button class="button is-small is-danger" type="submit">Remove</button>
                         </form>
                     </div>
