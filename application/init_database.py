@@ -9,8 +9,8 @@ from flask import url_for, redirect
 # Create a user and a couple of venues and events to test with.
 @app.route("/init")
 def create_user():
-    Venue.query.delete()
     Event.query.delete()
+    Venue.query.delete()
     User.query.delete()
     db.session.commit()
     u = User(
@@ -20,25 +20,26 @@ def create_user():
         email="admin@localhost",
     )
     db.session.add(u)
-    v = Venue(name="Gurula", location="Exactum")
+    v1 = Venue(name="Gurula", location="Exactum")
     db.session.add(v)
-    v = Venue(name="Klusteri", location="Leppäsuonkatu 12, Helsinki")
-    db.session.add(v)
+    v2 = Venue(name="Klusteri", location="Leppäsuonkatu 12, Helsinki")
+    db.session.add(v2)
+    db.session.commit()
 
     e = Event(
-        admin_id=1,
+        admin_id=u.id,
         name="Testitapahtuma",
         info="Testi",
-        venue_id=1,
+        venue_id=v.id,
         start_time=datetime.now() + timedelta(hours=2),
         end_time=datetime.now() + timedelta(hours=4),
     )
     db.session().add(e)
     e = Event(
-        admin_id=1,
+        admin_id=u.id,
         name="Testitapahtuma2",
         info="Testi2",
-        venue_id=2,
+        venue_id=v2.id,
         start_time=datetime.now() + timedelta(hours=2),
         end_time=datetime.now() + timedelta(hours=4),
     )
