@@ -27,6 +27,7 @@ def event_summary():
         SELECT t3.name venue_name, t3.location venue_location, t4.*, account.full_name as organizer
         FROM venue t3 LEFT JOIN t4 ON t4.venue_id = t3.id
         INNER JOIN account ON t4.admin_id=account.id
+        WHERE t4.end_time > date('now')
     """
     )
     return db.engine.execute(stmt)

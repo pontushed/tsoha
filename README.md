@@ -11,6 +11,9 @@ Käyttötapauksista löytyy tarkemmat kuvaukset [täältä.](documentation/kaytt
 
 ## Dokumentaatio
 
+#### Asennus- ja käyttöohje
+
+
 #### Tietokantakaavio:
 
 ![kaavio](documentation/tietokantakaavio.png)
@@ -20,3 +23,5 @@ Käyttötapauksista löytyy tarkemmat kuvaukset [täältä.](documentation/kaytt
 [Työaikakirjanpito](documentation/tyoaikakirjanpito.md)
 
 [Kehityspäiväkirja](documentation/kehityspaivakirja.md)
+
+[Create Table-lauseet](documentation/create-table-lauseet.md)
