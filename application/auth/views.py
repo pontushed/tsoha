@@ -51,5 +51,5 @@ def auth_register():
 
     db.session.add(u)
     db.session().commit()
-    login_user(u)
+    login_user(u, remember=True)
     return redirect(url_for("index"))

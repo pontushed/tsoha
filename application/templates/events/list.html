@@ -21,15 +21,29 @@
                                 <br>
                                 {{ e.info }}<br>
                                 Organized by {{ e.organizer }}
+                                {% if current_user.is_authenticated %}
+                                {% if e.id in myevents %}
+                            <p class="subtitle">You have joined this event!</p>
+                            <form method="POST" action="{{ url_for('leave_event', event_id=e.id) }}">
+                                <button class="button" type="submit">Leave event</button>
+                            </form>
+                            {% else %}
+                            <form method="POST" action="{{ url_for('join_event', event_id=e.id) }}">
+                                <button class="button" type="submit">Join event</button>
+                            </form>
+                            {% endif %}
+                            {% endif %}
                             </p>
                         </div>
                     </div>
-                    {% if current_user.is_authenticated %}
+                    {% if current_user.is_authenticated and current_user.id == e.admin_id %}
                     <div class="media-right">
-                        <a href="{{ url_for('events_edit', event_id=e.id) }}" title="Edit event"><i
-                                class="fas fa-edit"></i></a>
+                        <a class="button is-small is-fullwidth is-info"
+                            href="{{ url_for('events_edit', event_id=e.id) }}">
+                            Edit
+                        </a>
                         <form method="POST" action="{{ url_for('events_delete', event_id=e.id) }}">
-                            <button class="delete" type="submit"></button>
+                            <button class="button is-small is-danger" type="submit">Remove</button>
                         </form>
                     </div>
                     {% endif %}
