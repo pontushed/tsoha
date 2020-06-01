@@ -21,7 +21,7 @@ def create_user():
     )
     db.session.add(u)
     v1 = Venue(name="Gurula", location="Exactum")
-    db.session.add(v)
+    db.session.add(v1)
     v2 = Venue(name="Klusteri", location="Leppäsuonkatu 12, Helsinki")
     db.session.add(v2)
     db.session.commit()
@@ -30,7 +30,7 @@ def create_user():
         admin_id=u.id,
         name="Testitapahtuma",
         info="Testi",
-        venue_id=v.id,
+        venue_id=v1.id,
         start_time=datetime.now() + timedelta(hours=2),
         end_time=datetime.now() + timedelta(hours=4),
     )
