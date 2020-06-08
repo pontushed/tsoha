@@ -9,4 +9,5 @@ Pidän myös [kehityspäiväkirjaa](kehityspaivakirja.md), jossa selostan tarkem
 | 25.5 | 5 | Events CRUD, Rekisteröityminen ja sen validointi |
 | 31.5 | 4 | Bugin korjaus, ajan näyttämisen suodatintoiminto, validointia "new event"-lomakkeeseen |
 | 1.6 | 6 | Lisää toiminnallisuutta, kaksi yhteenvetokyselyä (Events-sivu sekä etusivu), suojausta |
-| **yht.** | _*23 tuntia*_ |
+| 8.6 | 8 | Autorisointi, Validoinnin parantamista, lisää toiminnallisuutta |
+| **yht.** | _*31 tuntia*_ |

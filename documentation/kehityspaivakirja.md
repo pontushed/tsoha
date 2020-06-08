@@ -1,5 +1,10 @@
 # Kehityspäiväkirja
 
+#### 8.6.2020
+
+Tein autorisoinnin valmiiksi. Lisäsin sivun, jolta näkee oman profiilin tiedot. Autorisointia tarvitaan tällä hetkellä vain Venues-kohteen poistoon. Se onnistuu, jos kuuluu rooliin "admin".
+Lisäsin validointia lähes kaikkiin lomakkeisiin. Aloitin tekemään keskusteluominaisuutta. Tapahtumasta voi avata oman sivun, johon tulee siihen liittyvät kommentit.
+
 #### 1.6.2020
 
 Lisäsin yhteenvetokyselyn etusivulle. Se näyttää suositut tapahtumat, eli tapahtumat, joissa on osallistujia.
@@ -11,7 +16,7 @@ Lisäsin myös varmistuksen poistojen yhteyteen. Tapahtumapaikan poisto poistaa 
 
 #### 31.5.2020
 
-Lisäsin ajan validoinnin "Organize new event"-lomakkeeseen. Alku- ja lopetusajan pitää olla tulevaisuudessa, ekä lopetusajan pitää olla alkuajan jälkeen.
+Lisäsin ajan validoinnin "Organize new event"-lomakkeeseen. Alku- ja lopetusajan pitää olla tulevaisuudessa ja lopetusajan pitää olla alkuajan jälkeen.
 
 Huomasin bugin, jossa uutta tapahtumaa lisättäessä venue-lista ei vastannut tietokannan tietoja. Tämä johtui siitä, että täydensin selectboxin valinnat forms.py:ssä olevalla kutsulla ja tämä ei toimi hyvin.
 ```python
@@ -44,7 +49,7 @@ Tein osan 3 etapit valmiiksi. Sovellukseen voi rekisteröityä, jonka jälkeen v
 
 #### 17.5.2020
 
-Isompi päivitys. Tein osan 2 valmiiksi sekä myös myöhempiä osioita. Dokumentaatiota päivitetty. Tein kaikkiin luokkiin pohjat valmiiksi, joten tietokanta vastaa jo projektin tämänhetkistä suunnitelmaa. Ulkoasu on toteutettu Bulma.io-tyylikirjastolla. Tein käyttäjän autentikoinnin ja polkujen suojausta. Käyttäjän salasana tallennetaan Bcrypt-kirjastolla tietokantaan. Käyttöliittymässä on valikkopohja ja responsiivinen ulkoasu. Sovellus toimii Herokussa PostgreSQL-tietokannalla.
+Isompi päivitys. Tein osan 2 valmiiksi sekä myös myöhempiä osioita. Dokumentaatiota on päivitetty. Tein kaikkiin luokkiin pohjat valmiiksi, joten tietokanta vastaa jo projektin tämänhetkistä suunnitelmaa. Ulkoasu on toteutettu Bulma.io-tyylikirjastolla. Tein käyttäjän autentikoinnin ja polkujen suojausta. Käyttäjän salasana tallennetaan Bcrypt-kirjastolla tietokantaan. Käyttöliittymässä on valikkopohja ja responsiivinen ulkoasu. Sovellus toimii Herokussa PostgreSQL-tietokannalla.
 
 #### 11.5.2020
 

@@ -72,7 +72,7 @@
             "Exactum"
         )
         ```
-    - Muokata tapahtumaa
+    - Muokata omaa tapahtumaa
 
         ```sql
         UPDATE event SET

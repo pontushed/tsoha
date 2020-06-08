@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for
-from application.events.models import Event
-from application.events.forms import EventForm
+from application.events.models import Event, Comment
+from application.events.forms import EventForm, CommentForm
 from application.venues.models import Venue
 from application.auth.models import User
 from flask_login import login_required, current_user
@@ -60,6 +60,23 @@ def events_create():
 
 
 @app.route("/events/<event_id>", methods=["GET"])
+def events_single(event_id):
+    commentForm = CommentForm()
+    e = Event.query.get(event_id)
+    v = Venue.query.get(e.venue_id)
+    organizer = User.query.get(e.admin_id)
+    comments = Event.get_event_comments(event_id)
+    return render_template(
+        "events/single.html",
+        event=e,
+        venue=v,
+        organizer=organizer,
+        comments=comments,
+        commentForm=commentForm,
+    )
+
+
+@app.route("/events/edit/<event_id>", methods=["GET"])
 @login_required
 def events_edit(event_id):
     e = Event.query.get(event_id)
@@ -79,13 +96,15 @@ def events_edit(event_id):
 @login_required
 def events_delete(event_id):
     e = Event.query.get(event_id)
-    if e.admin_id == current_user.id:
+    if e.admin_id == current_user.id or (
+        "admin" in [role.name for role in current_user.roles]
+    ):
         db.session.delete(e)
         db.session().commit()
     return redirect(url_for("events_index"))
 
 
-@app.route("/events/<event_id>", methods=["POST"])
+@app.route("/events/edit/<event_id>", methods=["POST"])
 @login_required
 def events_update(event_id):
     form = EventForm(request.form)
@@ -143,3 +162,15 @@ def leave_event(event_id):
     if "frontpage=1" in request.url:
         return redirect(url_for("index"))
     return redirect(url_for("events_index"))
+
+
+@app.route("/events/<event_id>/comment", methods=["POST"])
+@login_required
+def events_add_comment(event_id):
+    form = CommentForm(request.form)
+    comment = Comment(
+        author_id=current_user.id, event_id=event_id, comment=form.comment.data
+    )
+    db.session.add(comment)
+    db.session.commit()
+    return redirect(url_for("events_single", event_id=event_id))

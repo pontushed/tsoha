@@ -78,3 +78,6 @@ class User(db.Model, UserMixin):
 
     def is_authenticated(self):
         return True
+
+    def get_roles(self):
+        return [role.name for role in self.roles]

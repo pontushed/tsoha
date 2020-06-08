@@ -12,16 +12,21 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-    username = StringField("Username", [validators.Length(min=4)])
-    password = PasswordField("Password", [validators.Length(min=8)])
+    username = StringField("Username", [validators.Length(min=4, max=40)])
+    password = PasswordField("Password", [validators.Length(min=8, max=40)])
     full_name = StringField(
-        "Full name", [validators.InputRequired("Please enter your full name.")]
+        "Full name",
+        [
+            validators.InputRequired("Please enter your full name."),
+            validators.Length(max=40),
+        ],
     )
     email = StringField(
         "Email",
         [
             validators.InputRequired("Please enter your email address."),
             validators.Email("This field requires a valid email address"),
+            validators.length(max=50),
         ],
     )
 

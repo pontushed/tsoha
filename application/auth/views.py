@@ -3,7 +3,8 @@ import bcrypt
 from application import app, db
 from application.auth.models import User, Role
 from application.auth.forms import LoginForm, RegisterForm
-from flask_login import login_user, logout_user
+from application.events.models import Event
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -53,3 +54,14 @@ def auth_register():
     db.session().commit()
     login_user(u, remember=True)
     return redirect(url_for("index"))
+
+
+@app.route("/profile", methods=["GET", "POST"])
+@login_required
+def auth_profile():
+    u = User.query.get(current_user.id)
+    events_organized = Event.query.filter_by(admin_id=current_user.id)
+    if request.method == "GET":
+        return render_template(
+            "auth/profile.html", data=u, events_organized=events_organized
+        )

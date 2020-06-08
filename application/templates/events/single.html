@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+  <section class="hero">
+    <p class="title">
+      {{event.name}}
+    </p>
+    <p class="subtitle">
+      @ {{venue.name}}, {{venue.location}}
+    </p>
+  </section>
+  <section class="section">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <small>{{ event.start_time|datetime }} -
+              {{ event.end_time|datetime }}</small>
+            <br>
+            {{ event.info }}<br>
+            Organized by {{ organizer.full_name }}
+            {% if current_user.is_authenticated %}
+            {% if event in current_user.events %}
+          <p class="subtitle">You have joined this event!</p>
+          <form method="POST" action="{{ url_for('leave_event', event_id=event.id) }}">
+            <button class="button" type="submit">Leave event</button>
+          </form>
+          {% else %}
+          <form method="POST" action="{{ url_for('join_event', event_id=event.id) }}">
+            <button class="button" type="submit">Join event</button>
+          </form>
+          {% endif %}
+          {% endif %}
+          </p>
+        </div>
+      </div>
+      {% if current_user.is_authenticated and (current_user.id == event.admin_id or 'admin' in current_user.get_roles()) %}
+      <div class="media-right">
+        <a class="button is-small is-fullwidth" href="{{ url_for('events_edit', event_id=event.id) }}">
+          Edit
+        </a>
+        <form method="POST" onSubmit="return confirm('Are you sure you wish to remove?');"
+          action="{{ url_for('events_delete', event_id=event.id) }}">
+          <button class="button is-small" type="submit">Remove</button>
+        </form>
+      </div>
+      {% endif %}
+    </article>
+    {% if comments %}
+    <p class="subtitle">Comments:</p>
+    <div class="content">
+      <ul>
+        {% for comment in comments %}
+        <li>{{comment.post_time }}, {{comment.author}}: {{ comment.comment }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <p>No comments yet.</p>
+    {% endif %}
+    <div class="box is-4">
+      <form method="POST" action="{{ url_for('events_add_comment', event_id=event.id) }}">
+        <div class="field">
+          <label class="label">{{ commentForm.comment.label}}</label>
+          <div class="control">
+            {{ commentForm.comment(class_="input")}}
+          </div>
+        </div>
+        <p class="control">
+          <button class="button is-small" type="submit">Save</button>
+        </p>
+
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+      <div class="box content">
+        <p class="title">My Profile</p>
+        <p>Name: {{ data.full_name}}</p>
+        <p>Username: {{ data.username}}</p>
+        <p>Email: {{ data.email}}</p>
+        <p>Roles:
+        <ul>
+          {% for role in data.roles %}
+          <li><span class="tag is-info">{{ role.name }}</span></li>
+          {% endfor %}
+        </ul>
+        </p>
+        <p>Events organized by me:
+        <ul>
+          {% for event in events_organized %}
+          <li><a href="/events/{{event.id}}">{{ event.name }}</a></li>
+          {% endfor %}
+        </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

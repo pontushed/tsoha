@@ -2,6 +2,20 @@ from application import db
 from sqlalchemy import text
 
 
+class Comment(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey("event.id"))
+    author_id = db.Column(db.Integer, db.ForeignKey("account.id"))
+    post_time = db.Column(db.DateTime, default=db.func.current_timestamp())
+    comment = db.Column(db.Text)
+
+    def __init__(self, **kwargs):
+        self.event_id = kwargs["event_id"]
+        self.author_id = kwargs["author_id"]
+        self.comment = kwargs["comment"]
+
+
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     admin_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable=False)
@@ -29,4 +43,13 @@ class Event(db.Model):
         INNER JOIN venue t3 ON t1.venue_id=t3.id
         WHERE t1.end_time > date('now')"""
         )
+        return db.engine.execute(sql)
+
+    @staticmethod
+    def get_event_comments(event_id):
+        sql = text(
+            """SELECT t1.comment as comment, t2.full_name as author, t1.post_time as post_time from comments t1
+            LEFT JOIN account t2 ON t2.id=t1.author_id
+            WHERE t1.event_id=:event_id"""
+        ).params(event_id=event_id)
         return db.engine.execute(sql)

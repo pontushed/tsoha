@@ -29,7 +29,8 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <strong>{{ e.name }}</strong> <small>@{{ e.venue_name }},
+              <a href="{{url_for('events_single', event_id=e.id) }}"><strong>{{ e.name }}</strong></a>
+              <small>@{{ e.venue_name }},
                 {{ e.venue_location }}</small><br>
               <small>{{ e.start_time|datetime }} -
                 {{ e.end_time|datetime }}</small>
