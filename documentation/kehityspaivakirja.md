@@ -1,5 +1,17 @@
 # Kehityspäiväkirja
 
+#### 15.6.2020
+
+Selasin läpi saamani koodikatselmoinnit (Kiitos niistä!) ja toteutin muutaman saamani vinkkien mukaiset toiminnallisuudet:
+  - profiilin katsominen
+  - pääkäyttäjä voi hallinnoida käyttäjiä
+  - uuden tapahtumapaikan voi lisätä samalla kun tekee uuden tapahtuman
+
+Lisäksi otin pois fontawesomen, sillä se aiheutti hieman närää ACheckerille ja on 900kB kokoeisena vähän turha, kun käytin vain yhtä ikonia. Latasin Bulma.io-tyylikirjaston paikalliseksi static-kansioon.
+Paransin saavutettavuutta. Chromen Lighthouse-palikka antaakin jo varsin hyvän arvosanan sivustolle:
+![lighthouse](lighthouse.png)
+Best practices-kohta on vain 93%, koska sisältöä ei tarjota HTTP/2-protokollalla. Tämä on Flaskin ominaisuus.
+
 #### 8.6.2020
 
 Tein autorisoinnin valmiiksi. Lisäsin sivun, jolta näkee oman profiilin tiedot. Autorisointia tarvitaan tällä hetkellä vain Venues-kohteen poistoon. Se onnistuu, jos kuuluu rooliin "admin".

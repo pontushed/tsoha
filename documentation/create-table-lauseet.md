@@ -1,7 +1,7 @@
 # Create Table-lauseet
 
 ```sql
-CREATE TABLE role (
+CREATE TABLE Role (
 	id INTEGER NOT NULL, 
 	name VARCHAR(80), 
 	description VARCHAR(255), 
@@ -23,7 +23,7 @@ CREATE TABLE account (
 	CHECK (active IN (0, 1))
 );
 
-CREATE TABLE venue (
+CREATE TABLE Venue (
 	id INTEGER NOT NULL, 
 	date_created DATETIME, 
 	date_modified DATETIME, 
@@ -32,7 +32,7 @@ CREATE TABLE venue (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE event (
+CREATE TABLE Event (
 	id INTEGER NOT NULL, 
 	admin_id INTEGER NOT NULL, 
 	name VARCHAR(80), 
@@ -61,7 +61,7 @@ CREATE TABLE events_participants (
 	FOREIGN KEY(event_id) REFERENCES event (id)
 );
 
-CREATE TABLE comment (
+CREATE TABLE Comment (
 	id INTEGER NOT NULL, 
 	event_id INTEGER NOT NULL, 
 	author_id INTEGER NOT NULL, 
@@ -71,4 +71,9 @@ CREATE TABLE comment (
 	FOREIGN KEY(event_id) REFERENCES event (id), 
 	FOREIGN KEY(author_id) REFERENCES account (id)
 );
+
+CREATE INDEX idx_event_endtime
+ON Event(end_time);
+
+
 ```

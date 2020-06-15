@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for
 import bcrypt
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User, Role
-from application.auth.forms import LoginForm, RegisterForm
+from application.auth.forms import LoginForm, RegisterForm, ProfileForm
 from application.events.models import Event
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, current_user
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -65,3 +65,56 @@ def auth_profile():
         return render_template(
             "auth/profile.html", data=u, events_organized=events_organized
         )
+
+
+@app.route("/users", methods=["GET"])
+@login_required(role="admin")
+def users_list():
+    users = User.query.all()
+    return render_template("auth/list.html", users=users)
+
+
+@app.route("/users/delete/<user_id>", methods=["POST"])
+@login_required(role="admin")
+def users_delete(user_id):
+    u = User.query.get(user_id)
+    db.session.delete(u)
+    db.session().commit()
+    return redirect(url_for("users_list"))
+
+
+@app.route("/users/edit/<user_id>", methods=["GET"])
+@login_required(role="admin")
+def users_edit(user_id):
+    u = User.query.get(user_id)
+    form = ProfileForm(obj=u)
+    form.isadmin.data = "admin" in u.get_roles()
+    events_organized = Event.query.filter_by(admin_id=current_user.id)
+    return render_template(
+        "auth/edit_user.html", form=form, data=u, events_organized=events_organized
+    )
+
+
+@app.route("/users/edit/<user_id>", methods=["POST"])
+@login_required(role="admin")
+def users_update(user_id):
+    form = ProfileForm(request.form)
+    u = User.query.get(user_id)
+    events_organized = Event.query.filter_by(admin_id=current_user.id)
+    if not form.validate():
+        return render_template(
+            "auth/edit_user.html", form=form, data=u, events_organized=events_organized
+        )
+
+    u.username = form.username.data
+    u.full_name = form.full_name.data
+    u.email = form.email.data
+    if len(form.password.data) > 7 and len(form.password.data) < 41:
+        u.password = form.password.data
+    if form.isadmin.data:
+        u.roles = [Role.query.get(1)]
+    else:
+        u.roles = []
+    db.session().commit()
+
+    return redirect(url_for("users_list"))

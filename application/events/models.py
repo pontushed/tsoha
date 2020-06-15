@@ -24,7 +24,8 @@ class Event(db.Model):
     info = db.Column(db.Text)
     venue_id = db.Column(db.Integer, db.ForeignKey("venue.id"), nullable=False)
     start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime, index=True)
+    comments = db.relationship("Comment", cascade="delete")
 
     def __init__(self, **kwargs):
         self.admin_id = kwargs["admin_id"]
@@ -48,8 +49,17 @@ class Event(db.Model):
     @staticmethod
     def get_event_comments(event_id):
         sql = text(
-            """SELECT t1.comment as comment, t2.full_name as author, t1.post_time as post_time from comments t1
+            """SELECT t1.id, t1.comment as comment, t2.full_name as author, t1.post_time as post_time from comments t1
             LEFT JOIN account t2 ON t2.id=t1.author_id
             WHERE t1.event_id=:event_id"""
+        ).params(event_id=event_id)
+        return db.engine.execute(sql)
+
+    @staticmethod
+    def get_event_participants(event_id):
+        sql = text(
+            """SELECT t1.full_name FROM account t1
+            INNER JOIN events_participants t2 ON t2.user_id=t1.id
+            WHERE t2.event_id=:event_id"""
         ).params(event_id=event_id)
         return db.engine.execute(sql)

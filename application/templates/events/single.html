@@ -33,6 +33,14 @@
           {% endif %}
           {% endif %}
           </p>
+          {% if participants_list %}
+          <p>Participants:</p>
+          <ul>
+            {% for p in participants_list %}
+            <li>{{ p.full_name }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
       </div>
       {% if current_user.is_authenticated and (current_user.id == event.admin_id or 'admin' in current_user.get_roles()) %}
@@ -52,7 +60,14 @@
     <div class="content">
       <ul>
         {% for comment in comments %}
-        <li>{{comment.post_time }}, {{comment.author}}: {{ comment.comment }}</li>
+        <li>{{comment.post_time }}, {{comment.author}}: {{ comment.comment }}
+          {% if current_user.is_authenticated and (current_user.id == event.admin_id or 'admin' in current_user.get_roles()) %}
+          <form method="POST" onSubmit="return confirm('Are you sure you wish to remove this comment?');"
+            action="{{ url_for('comments_delete', event_id=event.id, comment_id=comment.id) }}">
+            <button class="button is-small" type="submit">Remove</button>
+          </form>
+          {% endif %}
+        </li>
         {% endfor %}
       </ul>
     </div>

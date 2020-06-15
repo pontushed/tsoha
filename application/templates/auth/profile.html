@@ -9,6 +9,7 @@
         <p>Name: {{ data.full_name}}</p>
         <p>Username: {{ data.username}}</p>
         <p>Email: {{ data.email}}</p>
+        {% if data.roles %}
         <p>Roles:
         <ul>
           {% for role in data.roles %}
@@ -16,6 +17,9 @@
           {% endfor %}
         </ul>
         </p>
+        {% else %}
+        <p>Role: Basic user</p>
+        {% endif %}
         <p>Events organized by me:
         <ul>
           {% for event in events_organized %}

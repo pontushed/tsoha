@@ -1,5 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, validators, ValidationError
+from wtforms import (
+    PasswordField,
+    StringField,
+    BooleanField,
+    validators,
+    ValidationError,
+)
 from application.auth.models import User
 
 
@@ -18,7 +24,7 @@ class RegisterForm(FlaskForm):
         "Full name",
         [
             validators.InputRequired("Please enter your full name."),
-            validators.Length(max=40),
+            validators.Length(max=60),
         ],
     )
     email = StringField(
@@ -26,7 +32,7 @@ class RegisterForm(FlaskForm):
         [
             validators.InputRequired("Please enter your email address."),
             validators.Email("This field requires a valid email address"),
-            validators.length(max=50),
+            validators.length(max=255),
         ],
     )
 
@@ -36,9 +42,22 @@ class RegisterForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            raise ValidationError("That username is taken. Please choose another.")
+            raise ValidationError("That username is taken. Please choose another one.")
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError("That email is taken. Please choose another.")
+            raise ValidationError("That email is taken. Please choose another one.")
+
+
+class ProfileForm(RegisterForm):
+    password = PasswordField(
+        "Reset Password", [validators.Optional(), validators.Length(min=8, max=40)]
+    )
+    isadmin = BooleanField("User is an admin")
+
+    def validate_username(self, username):
+        return
+
+    def validate_email(self, email):
+        return

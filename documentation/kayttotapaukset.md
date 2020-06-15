@@ -36,11 +36,16 @@
         ```
     - Kirjoittaa tapahtumaan liittyvän kommentin tai kysymyksen
 
-        `tulossa`
+        ```sql
+        INSERT INTO comments (event_id, author_id, comment) VALUES (3, 1, 'Onko ruokaa tarjolla?')
+        ```
 
     - Nähdä muut osallistujat
     
-        `tulossa`
+        ```sql
+        SELECT t1.full_name FROM account t1
+        INNER JOIN events_participants t2 ON t2.user_id=t1.id WHERE t2.event_id=1
+        ```
         
     - Luoda uuden tapahtuman
 
@@ -54,11 +59,11 @@
             end_time
         ) VALUES (
             3,
-            "Testitapahtuma",
-            "Testataan jotain",
+            'Testitapahtuma',
+            'Testataan jotain',
             1,
-            "2020-06-04 12:00"
-            "2020-06-04 16:00"
+            '2020-06-04 12:00'
+            '2020-06-04 16:00'
         )
         ```
     - Luoda uuden tapahtumapaikan
@@ -68,19 +73,25 @@
             name,
             location
         ) VALUES (
-            "Gurula",
-            "Exactum"
+            'Gurula',
+            'Exactum'
         )
         ```
     - Muokata omaa tapahtumaa
 
         ```sql
         UPDATE event SET
-            name="Uusi nimi",
-            info="Uusi info",
-            start_time="2020-06-04 12:15"
-            end_time="2020-06-04 16:15"
-        WHERE event_id=14
+            name='Uusi nimi',
+            info='Uusi info',
+            start_time='2020-06-04 12:15'
+            end_time='2020-06-04 16:15'
+        WHERE id=14
+        ```
+
+    - Poistaa oman tapahtuman
+
+        ```sql
+        DELETE FROM event WHERE id=14
         ```
 
 * Pääkäyttäjä voi:
@@ -90,11 +101,36 @@
         DELETE FROM User WHERE id=14
         ```
 
+        esim.
         ```sql
-        UPDATE User SET email="uusi@email.fi" WHERE id=14
+        UPDATE User SET email='uusi@email.fi' WHERE id=14
         ```
 
-    - Muokata ja poistaa muiden käyttäjien tapahtumia ja kommentteja
+    - Muokata ja poistaa muiden käyttäjien tapahtumia ja poistaa kommentteja
+
+         ```sql
+        UPDATE event SET
+            name='Uusi nimi',
+            info='Uusi info',
+            start_time='2020-06-04 12:15'
+            end_time='2020-06-04 16:15'
+        WHERE event_id=14
+        ```
+
+         ```sql
+        DELETE FROM event WHERE id=14
+        ```
+
+         ```sql
+        DELETE FROM comments WHERE id=33
+        ```
     
     - Muokata ja poistaa tapahtumapaikkoja
 
+        ```sql
+        UPDATE Venue SET name='Gurula' WHERE id=1
+        ```
+
+        ```sql
+        DELETE FROM Venue WHERE id=1
+        ```

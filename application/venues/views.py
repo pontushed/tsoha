@@ -53,7 +53,6 @@ def venues_create():
 
     db.session().add(v)
     db.session().commit()
-
     return redirect(url_for("venues_index"))
 
 

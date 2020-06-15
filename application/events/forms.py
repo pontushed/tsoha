@@ -7,6 +7,7 @@ from wtforms import (
     ValidationError,
 )
 from datetime import datetime as dt
+from application.venues.models import Venue
 
 
 class CommentForm(FlaskForm):
@@ -29,7 +30,7 @@ class EventForm(FlaskForm):
     name = StringField(
         "Event name",
         [
-            validators.Length(min=2, max=40),
+            validators.Length(min=2, max=80),
             validators.InputRequired("Please enter the event name."),
         ],
     )
@@ -41,6 +42,8 @@ class EventForm(FlaskForm):
         ],
     )
     venue = SelectField("Event venue", coerce=int)
+    new_venue_name = StringField("New venue name")
+    new_venue_location = StringField("New venue location")
     start_time = DateTimeField(
         "Start time",
         validators=[
@@ -74,5 +77,23 @@ class EventForm(FlaskForm):
                 return False
             if self.end_time.data < self.start_time.data:
                 self.end_time.errors.append("Event cannot end before it starts")
+                return False
+        if self.venue.data == -1:
+            name_length = len(self.new_venue_name.data)
+            location_length = len(self.new_venue_location.data)
+            if name_length < 2 or name_length > 40:
+                self.new_venue_name.errors.append("Length should be: min=2, max=40")
+                return False
+            if name_length < 2 or name_length > 144:
+                self.new_venue_location.errors.append(
+                    "Length should be: min=2, max=144"
+                )
+                return False
+            duplicateVenue = Venue.query.filter_by(
+                name=self.new_venue_name.data, location=self.new_venue_location.data
+            ).first()
+            if duplicateVenue:
+                self.new_venue_name.errors.append("This Venue already exists.")
+                self.new_venue_location.errors.append("This Venue already exists.")
                 return False
         return result

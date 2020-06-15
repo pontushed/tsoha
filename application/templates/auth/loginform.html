@@ -8,14 +8,14 @@
                 <div class="field">
                     {{ form.username.label(class_="label") }}
                     <div class="control">
-                        {{ form.username(class_="input") }}
+                        {{ form.username(class_="input", autocomplete="username") }}
                     </div>
                     <p class="help is-danger">{{ erroru }}</p>
                 </div>
                 <div class="field">
                     {{ form.password.label(class_="label") }}
                     <div class="control">
-                        {{ form.password(class_="input") }}
+                        {{ form.password(class_="input", autocomplete="current-password") }}
                     </div>
                     <p class="help is-danger">{{ errorp }}</p>
                 </div>

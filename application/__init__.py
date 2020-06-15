@@ -64,7 +64,6 @@ from application import views
 from application.auth import models
 from application.auth.models import Role, User
 from application.auth import views
-from application.comments import models
 from application.events import models
 from application.events import views
 from application.venues import models
@@ -80,7 +79,10 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-db.create_all()
+try:
+    db.create_all()
+except:
+    pass
 
 from application import init_database
 

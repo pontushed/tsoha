@@ -33,7 +33,7 @@
                 </div>
                 <div class="field">
                     <label class="label">{{ form.venue.label}}</label>
-                    <div class="control">
+                    <div class="control" id="venue-selector">
                         {{ form.venue(class_="select") }}
                     </div>
                     <ul>
@@ -41,6 +41,31 @@
                         <li class="help is-danger">{{ error }}</li>
                         {% endfor %}
                     </ul>
+                </div>
+                <div id="venue-form" class="box is-primary">
+                    <p class="subtitle">Create a new venue for this event</p>
+                    <div class="field">
+                        <label class="label">{{ form.new_venue_name.label}}</label>
+                        <div class="control">
+                            {{ form.new_venue_name(class_="input") }}
+                        </div>
+                        <ul>
+                            {% for error in form.new_venue_name.errors %}
+                            <li class="help is-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="field">
+                        <label class="label">{{ form.new_venue_location.label}}</label>
+                        <div class="control">
+                            {{ form.new_venue_location(class_="input") }}
+                        </div>
+                        <ul>
+                            {% for error in form.new_venue_location.errors %}
+                            <li class="help is-danger">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
                 <div class="field">
                     <label class="label">{{ form.start_time.label}}</label>
@@ -75,4 +100,23 @@
             </form>
     </section>
 </div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const $venueSelector = document.getElementById('venue-selector').firstElementChild;
+        const $venueForm = document.getElementById('venue-form');
+        if ($venueSelector.options[$venueSelector.selectedIndex].value !== "-1") {
+            $venueForm.style.display = "none";
+        }
+
+        $venueSelector.addEventListener("change", (event) => {
+            if (Number(event.target.value) === -1) {
+                $venueForm.style.display = "";
+            } else {
+                $venueForm.style.display = "none";
+            }
+        });
+    });
+</script>
 {% endblock %}

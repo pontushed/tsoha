@@ -10,4 +10,5 @@ Pidän myös [kehityspäiväkirjaa](kehityspaivakirja.md), jossa selostan tarkem
 | 31.5 | 4 | Bugin korjaus, ajan näyttämisen suodatintoiminto, validointia "new event"-lomakkeeseen |
 | 1.6 | 6 | Lisää toiminnallisuutta, kaksi yhteenvetokyselyä (Events-sivu sekä etusivu), suojausta |
 | 8.6 | 8 | Autorisointi, Validoinnin parantamista, lisää toiminnallisuutta |
-| **yht.** | _*31 tuntia*_ |
+| 15.6 | 8 | Osan 6 kohdat |
+| **yht.** | _*39 tuntia*_ |

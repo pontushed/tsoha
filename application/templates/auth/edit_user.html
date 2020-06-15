@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+      <div class="box content">
+        <p class="title">Edit profile</p>
+        <form class="form" method="POST" action="{{ url_for('users_update', user_id=data.id) }}">
+          <div class="field">
+            <label class="label">{{ form.username.label}}</label>
+            <div class=" control">
+              {{ form.username(class_="input") }}
+            </div>
+            <ul>
+              {% for error in form.username.errors %}
+              <li class="help is-danger">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="field">
+            <label class="label">{{ form.full_name.label}}</label>
+            <div class=" control">
+              {{ form.full_name(class_="input") }}
+            </div>
+            <ul>
+              {% for error in form.full_name.errors %}
+              <li class="help is-danger">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="field">
+            <label class="label">{{ form.email.label}}</label>
+            <div class=" control">
+              {{ form.email(class_="input") }}
+            </div>
+            <ul>
+              {% for error in form.email.errors %}
+              <li class="help is-danger">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="field">
+            <label class="label">{{ form.password.label}}</label>
+            <div class=" control">
+              {{ form.password(class_="input") }}
+            </div>
+            <ul>
+              {% for error in form.password.errors %}
+              <li class="help is-danger">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="field">
+            <label class="label">{{ form.isadmin.label}}</label>
+            <div class=" control">
+              {{ form.isadmin(class_="checkbox") }}
+            </div>
+            <ul>
+              {% for error in form.isadmin.errors %}
+              <li class="help is-danger">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <input class="button is-primary" type="submit" value="Save" />
+            </div>
+            <div class="control">
+              <a class="button is-light" href="{{ url_for('users_list') }}">Go back</a>
+            </div>
+          </div>
+        </form>
+        <p>Events organized by me:
+        <ul>
+          {% for event in events_organized %}
+          <li><a href="/events/{{event.id}}">{{ event.name }}</a></li>
+          {% endfor %}
+        </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

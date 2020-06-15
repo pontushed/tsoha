@@ -14,7 +14,7 @@ class VenueForm(FlaskForm):
     location = StringField(
         "Venue location",
         [
-            validators.Length(min=2, max=255),
+            validators.Length(min=2, max=144),
             validators.InputRequired("Please enter a location."),
         ],
     )

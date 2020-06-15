@@ -14,6 +14,8 @@ class Venue(db.Model):
     location = db.Column(db.String(144), nullable=False)
     events = db.relationship("Event", backref="event")
 
+    __table_args__ = (db.UniqueConstraint("name", "location"),)
+
     def __init__(self, name, location):
         self.name = name
         self.location = location
