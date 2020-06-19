@@ -11,4 +11,5 @@ Pidän myös [kehityspäiväkirjaa](kehityspaivakirja.md), jossa selostan tarkem
 | 1.6 | 6 | Lisää toiminnallisuutta, kaksi yhteenvetokyselyä (Events-sivu sekä etusivu), suojausta |
 | 8.6 | 8 | Autorisointi, Validoinnin parantamista, lisää toiminnallisuutta |
 | 15.6 | 8 | Osan 6 kohdat |
-| **yht.** | _*39 tuntia*_ |
+| 19.6 | 2 | Viimeistely |
+| **yht.** | _*41 tuntia*_ |
