@@ -1,5 +1,9 @@
 # Kehityspäiväkirja
 
+#### 19.6.2020
+
+Tein toisen yhteenvetokyselyn Venues-sivulle, joka laskee tapahtumapaikkojen listauksessa tapahtumapaikkaan liittyvät tapahtumat. Lisäsin etusivulle kehoituksen käyttäjälle, joka näytetään mikäli tietokannassa ei ole tapahtumia tai niissä ei ole vielä osallistujia.
+
 #### 15.6.2020
 
 Selasin läpi saamani koodikatselmoinnit (Kiitos niistä!) ja toteutin muutaman saamani vinkkien mukaiset toiminnallisuudet:

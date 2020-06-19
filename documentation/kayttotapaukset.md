@@ -140,3 +140,11 @@
         ```sql
         DELETE FROM Venue WHERE id=1
         ```
+
+# Jatkokehitysideat
+
+Käytön lisääntyessä pitäisi tehdä sivutus hakuihin ja näkymiin.
+Käyttäjä voisi muokata profiilitietojaan. Tällä hetkellä siihen tarvitaan ylläpitäjä.
+Käyttöoikeuksiin konfigurointi:
+- Mitä normaalikäyttäjä pystyy tekemään, mitä ylläpitäjä? 
+- Voiko ylläpitäjä poistaa toisen ylläpitäjän? (Nyt pystyy)

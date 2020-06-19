@@ -47,9 +47,10 @@ $ pip install -r requirements.txt
 
 **Käyttäminen**
 
-Mene selaimella osoitteeseen http://localhost:5000
+Mene selaimella osoitteeseen http://localhost:5000.
+
 Alkutilanteessa sovelluksessa ei ole mitään tietoja, joten siirry selaimella osoitteeseen http://localhost:5000/init . Sovellus alustetaan testidatalla, eli parilla käyttäjällä ja tapahtumalla.
-Voit kirjautua käyttäjänä 'admin', salasana 'admin'.
+Voit kirjautua käyttäjänä 'admin', salasana 'admin'. Alustuksen voi tehdä vain kerran.
 
 
 ## Asennus Herokuun
