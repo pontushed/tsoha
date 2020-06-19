@@ -27,7 +27,7 @@ class Venue(db.Model):
             """
             WITH t2 AS (
                 SELECT venue.id, count(*) as events FROM venue
-                LEFT JOIN event ON venue.id=event.venue_id GROUP BY venue.id
+                LEFT JOIN event ON venue.id=event.venue_id WHERE event.end_time > date('now') GROUP BY venue.id
             )
             SELECT venue.id, venue.name, venue.location, t2.events AS events FROM venue
             LEFT JOIN t2 ON venue.id=t2.id ORDER BY venue.name
