@@ -62,9 +62,15 @@
     <div class="message-header">
       <p>There are no events yet with participants!</p>
     </div>
+    {% if current_user.is_authenticated %}
     <div class="message-body">
       Go to the 'Events' page and be the first to join an event or organize a new one to get things going!
     </div>
+    {% else %}
+    <div class="message-body">
+      Someone should organize an event! Register / Login and be that person!
+    </div>
+    {% endif %}
   </article>
   {% endif %}
 </main>

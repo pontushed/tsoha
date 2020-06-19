@@ -16,7 +16,7 @@ def events_index():
         myevents = User.query.get(current_user.id).events
         myevents = [e.id for e in myevents]
     return render_template(
-        "events/list.html", events=Event.list_events(), myevents=myevents
+        "events/list.html", events=Event.list_events().fetchall(), myevents=myevents
     )
 
 

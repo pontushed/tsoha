@@ -52,6 +52,9 @@
             </li>
             {% endfor %}
         </ul>
+        {% if not current_user.is_authenticated and events|length == 0 %}
+        <p class="subtitle">No events yet.</p>
+        {% endif %}
     </section>
 </main>
 {% endblock %}

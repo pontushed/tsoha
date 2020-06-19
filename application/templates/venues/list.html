@@ -35,6 +35,9 @@
         {% if current_user.is_authenticated %}
         <a class="button is-primary" href="/venues/new/">Add new venue</a>
         {% endif %}
+        {% if not current_user.is_authenticated and venues|length == 0 %}
+        <p class="subtitle">No venues yet.</p>
+        {% endif %}
     </section>
 </main>
 {% endblock %}
