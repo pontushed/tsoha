@@ -7,7 +7,7 @@ from application.venues.forms import VenueForm
 
 @app.route("/venues/", methods=["GET"])
 def venues_index():
-    return render_template("venues/list.html", venues=Venue.query.all())
+    return render_template("venues/list.html", venues=Venue.venue_summary())
 
 
 @app.route("/venues/new/")

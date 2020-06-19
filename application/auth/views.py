@@ -111,6 +111,7 @@ def users_update(user_id):
     u.email = form.email.data
     if len(form.password.data) > 7 and len(form.password.data) < 41:
         u.password = form.password.data
+    # admin role (id=1) is the only supported role in this version
     if form.isadmin.data:
         u.roles = [Role.query.get(1)]
     else:

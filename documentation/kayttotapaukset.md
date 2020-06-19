@@ -94,6 +94,12 @@
         DELETE FROM event WHERE id=14
         ```
 
+    - Muokata tapahtumapaikkaa
+
+        ```sql
+        UPDATE Venue SET name='Gurula' WHERE id=1
+        ```
+
 * Pääkäyttäjä voi:
     - Hallinnoida käyttäjiä
 

@@ -1,5 +1,6 @@
 from application import db
 from application.events.models import Event
+from sqlalchemy import text
 
 
 class Venue(db.Model):
@@ -19,3 +20,13 @@ class Venue(db.Model):
     def __init__(self, name, location):
         self.name = name
         self.location = location
+
+    @staticmethod
+    def venue_summary():
+        sql = text(
+            """
+        SELECT venue.id, venue.name, venue.location, count(*) AS events FROM venue
+        LEFT JOIN event ON venue.id=event.venue_id GROUP BY venue.name ORDER BY venue.name
+        """
+        )
+        return db.engine.execute(sql)

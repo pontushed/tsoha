@@ -63,3 +63,21 @@ class Event(db.Model):
             WHERE t2.event_id=:event_id"""
         ).params(event_id=event_id)
         return db.engine.execute(sql)
+
+    @staticmethod
+    def event_summary():
+        stmt = text(
+            """
+            WITH t4 AS (
+                SELECT t1.*, count(t2.user_id) participants FROM event t1
+                INNER JOIN events_participants t2
+                ON t2.event_id=t1.id
+                GROUP BY t1.id
+            )
+            SELECT t3.name venue_name, t3.location venue_location, t4.*, account.full_name as organizer
+            FROM venue t3 LEFT JOIN t4 ON t4.venue_id = t3.id
+            INNER JOIN account ON t4.admin_id=account.id
+            WHERE t4.end_time > date('now')
+        """
+        )
+        return db.engine.execute(stmt)

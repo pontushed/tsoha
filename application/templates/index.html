@@ -17,6 +17,7 @@
     <a class="button is-primary" href="{{ url_for('auth_login') }}">Login</a>
   </div>
   {% endif %}
+  {% if events %}
   <h2 class="subtitle">Popular events:</h2>
   <ul>
     {% for e in events %}
@@ -56,5 +57,15 @@
     </li>
     {% endfor %}
   </ul>
+  {% else %}
+  <article class="message is-info">
+    <div class="message-header">
+      <p>There are no events yet with participants!</p>
+    </div>
+    <div class="message-body">
+      Go to the 'Events' page and be the first to join an event or organize a new one to get things going!
+    </div>
+  </article>
+  {% endif %}
 </main>
 {% endblock %}
